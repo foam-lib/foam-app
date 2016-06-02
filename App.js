@@ -790,6 +790,7 @@ function loadResource(index,resource,onSuccess,onError,strict){
        type !== ResourceType.IMAGE &&
        type !== ResourceType.JSON &&
        type !== ResourceType.VIDEO){
+
         console.log(`Warning: Resource '${src}' of type '${type}' ${index !== null ? `at index ${index}` : ''} is not supported.`);
     }
 
@@ -903,6 +904,8 @@ function loadResourceBundle(bundle,onSuccess,onError,onProcess,strict){
  * @param [onError] - Optional on resource error callback.
  * @param [onProcess] - Optional on resource load process callback.
  * @param [onLoad] - Optional on resources loaded callback
+ * @param onError
+ * @param onProcess
  *
  * @example
  * CreateApp({
@@ -925,6 +928,7 @@ function loadResourceBundle(bundle,onSuccess,onError,onProcess,strict){
  *    canvas : someTargetCanvas
  * };
  */
+
 export function CreateApp(appObj, onError, onProcess, onLoad){
     appObj.config    = appObj.config || {};
     appObj.resources = appObj.resources || {};
@@ -938,10 +942,10 @@ export function CreateApp(appObj, onError, onProcess, onLoad){
 
     //check if context type is valid
     if(appObj.config.type && !(
-       appObj.config.type === ContextType.CONTEXT_2D ||
-       appObj.config.type === ContextType.CONTEXT_2D_SVG ||
-       appObj.config.type === ContextType.CONTEXT_3D ||
-       appObj.config.type === ContextType.CONTEXT_NONE)){
+        appObj.config.type === ContextType.CONTEXT_2D ||
+        appObj.config.type === ContextType.CONTEXT_2D_SVG ||
+        appObj.config.type === ContextType.CONTEXT_3D ||
+        appObj.config.type === ContextType.CONTEXT_NONE)){
         throw new Error(`Context type '${appObj.config.type}' not supported.`)
     }
 
