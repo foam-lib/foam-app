@@ -461,13 +461,13 @@ class App extends EventDispatcher{
             //TODO: Add fixed step + manual stepping
             let self = this;
             this.__tick = function(timestamp){
-                self.__time._previous = self.__time._now;
+                self.__time._prev = self.__time._now;
 
                 self.__time._now = timestamp;
                 self.__time._elapsed = Math.max(0,timestamp - self.__time._start);
                 self.__time._secondsElapsed = self.__time._elapsed * 0.001;
 
-                self.__time._frame = timestamp - self.__time._previous;
+                self.__time._frame = timestamp - self.__time._prev;
                 self.__time._delta = self.__time._frame * 0.001;
 
                 self.update(self.__time._delta,timestamp);
@@ -507,6 +507,10 @@ class App extends EventDispatcher{
     /*----------------------------------------------------------------------------------------------------------------*/
     // Update
     /*----------------------------------------------------------------------------------------------------------------*/
+
+    getTime(){
+        return this.__time;
+    }
 
     stopUpdate(){
         if(!this.__loop || !this.__tickRequest){
