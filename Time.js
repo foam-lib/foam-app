@@ -31,13 +31,6 @@ export default class Time extends EventDispatcher {
         this._state = State.STOPPED;
     }
 
-    static sharedTime(){
-        if(!Time.__sharedTime){
-            throw new Error('Time not initialized.');
-        }
-        return Time.__sharedTime;
-    }
-
     getState(){
         return this._state;
     }
@@ -86,13 +79,29 @@ export default class Time extends EventDispatcher {
     }
 
     toString(){
-        return `start:   ${this._start} \n
-                now:     ${this._now} \n
-                prev:    ${this._prev} \n
-                elapsed: ${this._secondsElapsed} \n
-                frame:   ${this._framesElapsed} \n
-                delta:   ${this._deltaSeconds} \n`;
+        return `
+start:   ${this._start}
+now:     ${this._now}
+prev:    ${this._prev}
+frame:   ${this._frame}
+delta:   ${this._delta}
+elapsed: ${this._secondsElapsed}`;
 
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    // Shared
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    makeShared(){
+        Time.__sharedTime = this;
+    }
+
+    static sharedTime(){
+        if(!Time.__sharedTime){
+            throw new Error('Time not initialized.');
+        }
+        return Time.__sharedTime;
     }
 }
 
