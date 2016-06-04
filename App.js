@@ -177,7 +177,7 @@ class App extends EventDispatcher{
         this.__window.makeShared();
 
         this.__window._bounds = Rect.create2v([0, 0], size);
-        this.__window._boundsNormalized = Rect.normalize(this.__window._bounds);
+        this.__window._boundsNormalized = Rect.normalized(this.__window._bounds);
         this.__window._aspectRatio = Rect.getAspectRatio(this.__window._bounds);
         this.__window._center = Rect.getCenter(this.__window._bounds);
         this.__window._fullscreen = false;
@@ -451,7 +451,6 @@ class App extends EventDispatcher{
         this.__loop = config.loop;
         this.__tick = null;
         this.__tickRequest = null;
-        this.__framesElapsed = 0;
 
         // no loop tick
         if(!this.__loop){
@@ -472,7 +471,7 @@ class App extends EventDispatcher{
 
                 self.update(self.__time._delta,timestamp);
 
-                self.__framesElapsed++;
+                self.__time._framesElapsed++;
                 self.__tickRequest = requestAnimationFrame(self.__tick);
             };
             this.__tick(0);
@@ -549,9 +548,13 @@ class App extends EventDispatcher{
     // Time shortcuts
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    getSecondsElapsed(){}
+    getSecondsElapsed(){
+        return this.__time._secondsElapsed;
+    }
 
-    getFramesElapsed(){}
+    getFramesElapsed(){
+        return this.__time._framesElapsed;
+    }
 
     getDelta(){}
 
