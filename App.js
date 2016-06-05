@@ -868,9 +868,9 @@ function loadResource(index,resource,onSuccess,onError,strict){
             source.setAttribute('src',src);
 
             video.appendChild(source);
-            
+
             if(isSafari){
-                video.appendChild(source);
+                onSuccess_(video);
                 console.warn('Video resources currently not supported in safari.')
             }
             break;
