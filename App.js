@@ -26,7 +26,6 @@ import KeyboardEvent from './KeyboardEvent';
 import Time from './Time';
 import TimeEvent from './TimeEvent';
 
-
 /*--------------------------------------------------------------------------------------------------------------------*/
 // DEFINES
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -105,6 +104,8 @@ window.performance = window.performance && window.performance.now ?
         return Date.now() - this.offset;
     }
 };
+
+const isSafari = typeof navigator !== 'undefined' && /Version\/[\d\.]+.*Safari/.test(navigator.userAgent);
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 // UTILS
@@ -777,6 +778,12 @@ function request(src,type,onSuccess,onError){
     request_.send();
 }
 
+function createElement(html){
+    var template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
+
 function loadResource(index,resource,onSuccess,onError,strict){
     let type = resource.type;
     let src  = resource.src;
@@ -825,13 +832,47 @@ function loadResource(index,resource,onSuccess,onError,strict){
             break;
 
         case ResourceType.VIDEO:
-            const video = document.createElement('video');
-            video.volume = 0;
-            video.autoplay = false;
-            video.loop = true;
-            video.muted = true;
-            video.src = src;
-            onSuccess_(video);
+            //TODO: Fix Safari
+
+            const video  = document.createElement('video');
+            const source = document.createElement('source');
+
+            let videoType = path.extname(src).substring(1);
+            switch(videoType){
+                case 'ogm':
+                case 'ogv':
+                    videoType = 'ogg';
+                    break;
+                case 'ogg':
+                case 'mp4':
+                case 'webm':
+                    break;
+                default:
+                    throw new Error(`Video type not supported '${videoType}'`);
+                    break;
+            }
+
+            //chrome/firefox
+            if(!isSafari){
+                video.addEventListener('canplay', function(){
+                    onSuccess_(video);
+                });
+            }
+
+            video.setAttribute('muted','');
+            video.setAttribute('preload','');
+            video.setAttribute('loop','');
+            video.setAttribute('muted','');
+
+            source.setAttribute('type',`video/${videoType}`);
+            source.setAttribute('src',src);
+
+            video.appendChild(source);
+            
+            if(isSafari){
+                video.appendChild(source);
+                console.warn('Video resources currently not supported in safari.')
+            }
             break;
 
         default:
