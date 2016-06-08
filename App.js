@@ -295,6 +295,10 @@ class App extends EventDispatcher{
                 self.onMouseDown(e);
             });
 
+            this.__mouse.addEventListener(MouseEvent.MOUSE_DRAG,function onMouseDragFirstResponder(e){
+                self.onMouseDrag(e);
+            });
+
             this.__mouse.addEventListener(MouseEvent.MOUSE_UP,function onMouseUpFirstResponder(e){
                 self.onMouseUp(e);
             });
@@ -426,6 +430,7 @@ class App extends EventDispatcher{
             });
 
             this.__keyboard.addEventListener(KeyboardEvent.KEY_DOWN,function onKeyDownFirstResponder(e){
+                console.log('crack');
                 self.onKeyDown(e);
             });
 
@@ -731,6 +736,7 @@ class App extends EventDispatcher{
     /*----------------------------------------------------------------------------------------------------------------*/
 
     onMouseDown(e){}
+    onMouseDrag(e){}
     onMouseUp(e){}
     onMouseDblClick(e){}
     onMouseMove(e){}
