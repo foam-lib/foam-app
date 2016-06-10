@@ -804,7 +804,8 @@ function loadResource(index,resource,onSuccess,onError,strict){
     if(type !== ResourceType.TEXT &&
        type !== ResourceType.IMAGE &&
        type !== ResourceType.JSON &&
-       type !== ResourceType.VIDEO){
+       type !== ResourceType.VIDEO &&
+       type !== ResourceType.ARRAY_BUFFER){
 
         console.log(`Warning: Resource '${src}' of type '${type}' ${index !== null ? `at index ${index}` : ''} is not supported.`);
     }
