@@ -430,7 +430,6 @@ class App extends EventDispatcher{
             });
 
             this.__keyboard.addEventListener(KeyboardEvent.KEY_DOWN,function onKeyDownFirstResponder(e){
-                console.log('crack');
                 self.onKeyDown(e);
             });
 
