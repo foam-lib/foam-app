@@ -80,6 +80,14 @@ export default class Mouse extends EventDispatcher{
         return this._positionNormalized[1];
     }
 
+    getPositionXPrevNormalized(){
+        return this._positionPrevNormalized[0];
+    }
+
+    getPositionYPrevNormalized(){
+        return this._positionPrevNormalized[1];
+    }
+
     getWheelDelta(){
         return this._wheelDelta;
     }
