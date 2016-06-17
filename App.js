@@ -561,7 +561,9 @@ class App extends EventDispatcher{
         return this.__time._framesElapsed;
     }
 
-    getDelta(){}
+    getDelta(){
+        return this.__time._delta;
+    }
 
     /*----------------------------------------------------------------------------------------------------------------*/
     // Context
@@ -750,6 +752,70 @@ class App extends EventDispatcher{
     onKeyDown(e){}
     onKeyPress(e){};
     onKeyUp(e){}
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+    // Shortcut input getter
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    getMousePosition(out){
+        return this.__mouse.getPosition(out);
+    }
+
+    getMousePositionPrev(out){
+        return this.__mouse.getPositionPrev(out);
+    }
+
+    getMousePositionNormalized(out){
+        return this.__mouse.getPositionNormalized(out);
+    }
+
+    getMousePositionPrevNormalized(out){
+        return this.__mouse.getPositionPrevNormalized(out);
+    }
+
+    getMousePositionX(){
+        return this.__mouse.getPositionX();
+    }
+
+    getMousePositionY(){
+        return this.__mouse.getPositionY();
+    }
+
+    getMousePositionXPrev(){
+        return this.__mouse.getPositionXPrev();
+    }
+
+    getMousePositionYPrev(){
+        return this.__mouse.getPositionYPrev();
+    }
+
+    getMousePositionXNormalized(){
+        return this.__mouse.getPositionXNormalized();
+    }
+
+    getMousePositionYNormalized(){
+        return this.__mouse.getPositionYNormalized();
+    }
+
+    getMousePositionXPrevNormalized(){
+        return this.__mouse.getPositionXPrevNormalized();
+    }
+
+    getMousePositionYPrevNormalized(){
+        return this.__mouse.getPositionYPrevNormalized();
+    }
+
+    getMouseWheelDelta(){
+        return this.__mouse.getWheelDelta();
+    }
+
+    getMouseWheelDirection(){
+        return this.__mouse.getWheelDirection();
+    }
+
+    isMouseDown(){
+        return this.__mouse.isDown();
+    }
 
     /*----------------------------------------------------------------------------------------------------------------*/
     // Frame
