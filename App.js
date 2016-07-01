@@ -64,6 +64,10 @@ export const DefaultConfig = Object.freeze({
      */
     type : ContextType.CONTEXT_3D,
     /**
+     * Context config
+     */
+    context : null,
+    /**
      * Target element HTMLCanvasElement / HTMLDomElement
      */
     element : null,
