@@ -2,7 +2,7 @@ import EventDispatcher from 'foam-event/EventDispatcher';
 
 /**
  * Keyboard
- * @class
+ * @class Keyboard
  * @classdesc Keyboard input representation.
  * @augments EventDispatcher
  */
