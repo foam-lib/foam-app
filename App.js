@@ -37,61 +37,43 @@ const Default = Object.freeze({
 
 /**
  * Available context types
- * @type {{CONTEXT_2D: string, CONTEXT_3D: string, CONTEXT_NONE: string}}
+ * @readonly
+ * @enum {string}
+ * @property {string} CONTEXT_2D - foam-context-2d
+ * @property {string} CONTEXT_2D_SVG - foam-context2d-svg
+ * @property {string} CONTEXT_3D - foam-context-3d
+ * @property {string} CONTEXT_NONE - no context
  */
 export const ContextType = Object.freeze({
-    /**
-     * foam-context-2d
-     */
     CONTEXT_2D : '2d',
-    /**
-     * foam-context-2d-svg
-     */
     CONTEXT_2D_SVG : '2d-svg',
-    /**
-     * foam-context-3d
-     */
     CONTEXT_3D   : '3d',
-    /**
-     * no context
-     */
     CONTEXT_NONE : 'none'
 });
 
+/**
+ * App default config.
+ * @readonly
+ * @type {Object}
+ * @property {string} [type=ContextType#CONTEXT_3D] - Context type 2d/3d/none
+ * @property {object} [context=null] - Context config
+ * @property {object} [element=null] - Target element HTMLCanvasElement / HTMLDomElement
+ * @property {object} [elementInput=null] - Target input element for Mouse / Keyboard events
+ * @property {object} [elementInputMouse=null] - Target input element for Mouse events
+ * @property {object} [elementInputTouch=null] - Target input element for Mouse events
+ * @property {object} [elementInputKeyboard=null] - Target input element for Keyboard events
+ * @property {boolean} [loop=true} - If true update animation loop is active
+ * @property {boolean} [interactive=true] - If true the app can receive user input
+ */
 export const DefaultConfig = Object.freeze({
-    /**
-     * Context type 2d/3d/none
-     */
     type : ContextType.CONTEXT_3D,
-    /**
-     * Context config
-     */
     context : null,
-    /**
-     * Target element HTMLCanvasElement / HTMLDomElement
-     */
     element : null,
-    /**
-     * Target input element for Mouse / Keyboard events
-     */
     elementInput : null,
-    /**
-     * Target input element for Mouse events
-     */
     elementInputMouse : null,
-    /**
-     * Target input element for Mouse events
-     */
     elementInputTouch : null,
-    /**
-     * Target input element for Keyboard events
-     */
     elementInputKeyboard : null,
-    /**
-     *
-     */
     loop : true,
-
     interactive : true
 });
 
@@ -127,11 +109,22 @@ function createFoamContainer(){
 // FOAM BASE APP
 /*--------------------------------------------------------------------------------------------------------------------*/
 
+/**
+ * App
+ * @class
+ * @classdesc The base class for all Foam applications.
+ */
 class App extends EventDispatcher{
     /*----------------------------------------------------------------------------------------------------------------*/
     // Constructor
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Constructor
+     * @param config
+     * @param resources
+     * @returns {App}
+     */
     constructor(config,resources){
         if(App.__sharedApp){
             throw new Error('Class is singleton.');
@@ -485,16 +478,21 @@ class App extends EventDispatcher{
             };
             this.__tick(0);
         }
-
     }
 
-    //override in sub-class
+    /**
+     * Callback on context not available.
+     */
     onContextNotAvailable(){}
 
     /*----------------------------------------------------------------------------------------------------------------*/
     // Shared
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Returns a shared app instance.
+     * @returns {null|App}
+     */
     static sharedApp(){
         if(!App.__sharedApp){
             new Error('App not initialized yet.');
@@ -506,20 +504,34 @@ class App extends EventDispatcher{
     // User overrides
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Called once after resource loading and context setup for initializing app properties. Must be overridden by user.
+     */
     setup(){
         throw new Error('setup() not implemented.');
     }
 
+    /**
+     * Tick callback, optional.
+     * @param delta
+     */
     update(delta){};
 
     /*----------------------------------------------------------------------------------------------------------------*/
     // Update
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Returns app time representation.
+     * @returns {Time}
+     */
     getTime(){
         return this.__time;
     }
 
+    /**
+     * Stops the update loop.
+     */
     stopUpdate(){
         if(!this.__loop || !this.__tickRequest){
             return;
@@ -529,6 +541,9 @@ class App extends EventDispatcher{
         this.dispatchEvent(new TimeEvent(TimeEvent.TIME_STOP,{timestamp:performance.now()}));
     }
 
+    /**
+     * Restarts the update loop if it has been stopped.
+     */
     restartUpdate(){
         if(!this.__loop || this.__tickRequest){
             return;
@@ -543,28 +558,50 @@ class App extends EventDispatcher{
         time._deltaSeconds = 0;
     }
 
-    resumeUpdate(){
+    /**
+     * Resumes the update loop if it has been stopped.
+     */
+    resumeUpdate(){}
 
-    }
-
+    /**
+     * Callback on update loop stop.
+     */
     onStopUpdate(){};
 
+    /**
+     * Callback on update loop restart.
+     */
     onRestartUpdate(){};
 
+    /**
+     * Callback on update loop resume.
+     */
     onResumeUpdate(){};
 
     /*----------------------------------------------------------------------------------------------------------------*/
     // Time shortcuts
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Returns the time elapsed since app start in seconds.
+     * @returns {number}
+     */
     getSecondsElapsed(){
         return this.__time._secondsElapsed;
     }
 
+    /**
+     * Returns the number of frames elapsed since app start.
+     * @returns {number}
+     */
     getFramesElapsed(){
         return this.__time._framesElapsed;
     }
 
+    /**
+     * Returns the delta time.
+     * @returns {number}
+     */
     getDelta(){
         return this.__time._delta;
     }
@@ -573,10 +610,18 @@ class App extends EventDispatcher{
     // Context
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Returns the type of context the app has been initialized with.
+     * @returns {*}
+     */
     getContextType(){
         return this.__contextType;
     }
 
+    /**
+     * Returns the context´s underlying element.
+     * @returns {*|null}
+     */
     getContextElement(){
         return this.__elementContext;
     }
@@ -585,6 +630,10 @@ class App extends EventDispatcher{
     // Screen
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Returns the screen´s device pixel ratio.
+     * @returns {number}
+     */
     getScreenContentScale(){
         return window.devicePixelRatio;
     };
@@ -643,7 +692,8 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window size.
-     * @param out
+     * @param {number[]} [out] - Optional out
+     * @returns {number[]}
      */
     getWindowSize(out){
         return this.__window.getSize(out);
@@ -651,6 +701,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window width.
+     * @returns {number}
      */
     getWindowWidth(){
         return this.__window.getWidth();
@@ -658,6 +709,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window height.
+     * @returns {number}
      */
     getWindowHeight(){
         return this.__window.getHeight();
@@ -665,7 +717,8 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window bounds.
-     * @param out
+     * @param {number[]} [out] - Optional out
+     * @returns {number[]}
      */
     getWindowBounds(out){
         return this.__window.getBounds(out);
@@ -673,14 +726,16 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window center.
-     * @param out
+     * @param {number[]} [out] - Optional out
+     * @returns {number[]}
      */
     getWindowCenter(out){
         return this.__window.getCenter(out);
     }
 
     /**
-     * Returns the current context window aspect ratio,
+     * Returns the current context window aspect ratio.
+     * @returns {number}
      */
     getWindowAspectRatio(){
         return this.__window.getAspectRatio();
@@ -740,83 +795,214 @@ class App extends EventDispatcher{
     // Input callback app first receiver
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Callback on mouse down event.
+     * @param e
+     */
     onMouseDown(e){}
+
+    /**
+     * Callback on mouse drag event.
+     * @param e
+     */
     onMouseDrag(e){}
+
+    /**
+     * Callback on mouse up event.
+     * @param e
+     */
     onMouseUp(e){}
+
+    /**
+     * Callback on mouse double click event.
+     * @param e
+     */
     onMouseDblClick(e){}
+
+    /**
+     * Callback on mouse move event.
+     * @param e
+     */
     onMouseMove(e){}
+
+    /**
+     * Callback on mouse enter event.
+     * @param e
+     */
     onMouseEnter(e){}
+
+    /**
+     * Callback on mouse out event.
+     * @param e
+     */
     onMouseOut(e){}
+
+    /**
+     * Callback on mouse wheel event.
+     * @param e
+     */
     onMouseWheel(e){}
 
+    /**
+     * Callback on touch begin event.
+     * @param e
+     */
     onTouchBegin(e){}
+
+    /**
+     * Callback on touch move event.
+     * @param e
+     */
     onTouchMove(e){}
+
+    /**
+     * Callback on touch end event.
+     * @param e
+     */
     onTouchEnd(e){}
 
+    /**
+     * Callback on key down event.
+     * @param e
+     */
     onKeyDown(e){}
+
+    /**
+     * Callback on key press event.
+     * @param e
+     */
     onKeyPress(e){};
+
+    /**
+     * Callback on key up event.
+     * @param e
+     */
     onKeyUp(e){}
 
     /*----------------------------------------------------------------------------------------------------------------*/
     // Shortcut input getter
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Returns the mouse current position.
+     * @param out
+     * @returns {*}
+     */
     getMousePosition(out){
         return this.__mouse.getPosition(out);
     }
 
+    /**
+     * Returns the mouse previous position.
+     * @param out
+     * @returns {*}
+     */
     getMousePositionPrev(out){
         return this.__mouse.getPositionPrev(out);
     }
 
+    /**
+     * Returns the current normalized mouse position.
+     * @param out
+     * @returns {*}
+     */
     getMousePositionNormalized(out){
         return this.__mouse.getPositionNormalized(out);
     }
 
+    /**
+     * Returns the previous normalized mouse position.
+     * @param out
+     * @returns {*}
+     */
     getMousePositionPrevNormalized(out){
         return this.__mouse.getPositionPrevNormalized(out);
     }
 
+    /**
+     * Returns the current mouse x-coordinate.
+     * @returns {*}
+     */
     getMousePositionX(){
         return this.__mouse.getPositionX();
     }
 
+    /**
+     * Returns the current mouse y-coordinate.
+     * @returns {*}
+     */
     getMousePositionY(){
         return this.__mouse.getPositionY();
     }
 
+    /**
+     * Returns the previous mouse x-coordinate.
+     * @returns {*}
+     */
     getMousePositionXPrev(){
         return this.__mouse.getPositionXPrev();
     }
 
+    /**
+     * Returns the previous mouse y-coordinate.
+     * @returns {*}
+     */
     getMousePositionYPrev(){
         return this.__mouse.getPositionYPrev();
     }
 
+    /**
+     * Returns the current normalized mouse x-coordinate.
+     * @returns {*}
+     */
     getMousePositionXNormalized(){
         return this.__mouse.getPositionXNormalized();
     }
 
+    /**
+     * Returns the current normalized mouse y-coordinate.
+     * @returns {*}
+     */
     getMousePositionYNormalized(){
         return this.__mouse.getPositionYNormalized();
     }
 
+    /**
+     * Returns the previous normalized mouse x-coordinate.
+     * @returns {*}
+     */
     getMousePositionXPrevNormalized(){
         return this.__mouse.getPositionXPrevNormalized();
     }
 
+    /**
+     * Returns the previous normalized mouse y-coordinate.
+     * @returns {*}
+     */
     getMousePositionYPrevNormalized(){
         return this.__mouse.getPositionYPrevNormalized();
     }
 
+    /**
+     * Returns the mouse wheel delta.
+     * @returns {*}
+     */
     getMouseWheelDelta(){
         return this.__mouse.getWheelDelta();
     }
 
+    /**
+     * Returns the mouse wheel direction.
+     * @returns {*}
+     */
     getMouseWheelDirection(){
         return this.__mouse.getWheelDirection();
     }
 
+    /**
+     * Returns true if the mouse is down.
+     * @returns {*}
+     */
     isMouseDown(){
         return this.__mouse.isDown();
     }
@@ -1048,7 +1234,6 @@ function loadResourceBundle(bundle,onSuccess,onError,onProcess,strict){
  *    canvas : someTargetCanvas
  * };
  */
-
 export function CreateApp(appObj, onError, onProcess, onLoad){
     appObj.config    = appObj.config || {};
     appObj.resources = appObj.resources || {};
