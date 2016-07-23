@@ -9,5 +9,4 @@ SharedResources.dispose = function(){
     }
 };
 
-
 export default SharedResources;
