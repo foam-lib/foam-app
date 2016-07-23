@@ -12,11 +12,6 @@ class Mouse extends EventDispatcher{
     // Constructor
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    /**
-     * Constructor
-     * @returns {Mouse}
-     * @private
-     */
     constructor(){
         if(Mouse.__sharedMouse){
             throw new Error('Class is singleton.');
