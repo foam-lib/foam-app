@@ -524,7 +524,7 @@ class App extends EventDispatcher{
 
     /**
      * Stops the update loop.
-     * @custom_group Update Loop
+     * @category Update Loop
      */
     stopUpdate(){
         if(!this.__loop || !this.__tickRequest){
@@ -537,7 +537,7 @@ class App extends EventDispatcher{
 
     /**
      * Restarts the update loop if it has been stopped.
-     * @custom_group Update Loop
+     * @category Update Loop
      */
     restartUpdate(){
         if(!this.__loop || this.__tickRequest){
@@ -555,25 +555,25 @@ class App extends EventDispatcher{
 
     /**
      * Resumes the update loop if it has been stopped.
-     * @custom_group Update Loop
+     * @category Update Loop
      */
     resumeUpdate(){}
 
     /**
      * Callback on update loop stop.
-     * @custom_group Update Loop
+     * @category Update Loop
      */
     onStopUpdate(){};
 
     /**
      * Callback on update loop restart.
-     * @custom_group Update Loop
+     * @category Update Loop
      */
     onRestartUpdate(){};
 
     /**
      * Callback on update loop resume.
-     * @custom_group Update Loop
+     * @category Update Loop
      */
     onResumeUpdate(){};
 
@@ -583,7 +583,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns app time representation.
-     * @custom_group Time
+     * @category Time
      * @returns {Time}
      */
     getTime(){
@@ -592,7 +592,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the time elapsed since app start in seconds.
-     * @custom_group Time
+     * @category Time
      * @returns {number}
      */
     getSecondsElapsed(){
@@ -601,7 +601,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the number of frames elapsed since app start.
-     * @custom_group Time
+     * @category Time
      * @returns {number}
      */
     getFramesElapsed(){
@@ -610,7 +610,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the delta time.
-     * @custom_group Time
+     * @category Time
      * @returns {number}
      */
     getDelta(){
@@ -623,7 +623,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the type of context the app has been initialized with.
-     * @custom_group Context
+     * @category Context
      * @returns {*}
      */
     getContextType(){
@@ -632,7 +632,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the context´s underlying element.
-     * @custom_group Context
+     * @category Context
      * @returns {*|null}
      */
     getContextElement(){
@@ -645,7 +645,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the screen´s device pixel ratio.
-     * @custom_group Screen
+     * @category Screen
      * @returns {number}
      */
     getScreenContentScale(){
@@ -658,7 +658,7 @@ class App extends EventDispatcher{
 
     /**
      * Sets the context window width and height.
-     * @custom_group Window
+     * @category Window
      * @param v
      * @param contentScale
      */
@@ -668,7 +668,7 @@ class App extends EventDispatcher{
 
     /**
      * Sets the context window width and height
-     * @custom_group Window.
+     * @category Window.
      * @param w
      * @param h
      * @param contentScale
@@ -708,7 +708,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window size.
-     * @custom_group Window
+     * @category Window
      * @param {number[]} [out] - Optional out
      * @returns {number[]}
      */
@@ -718,7 +718,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window width.
-     * @custom_group Window
+     * @category Window
      * @returns {number}
      */
     getWindowWidth(){
@@ -727,7 +727,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window height.
-     * @custom_group Window
+     * @category Window
      * @returns {number}
      */
     getWindowHeight(){
@@ -736,7 +736,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window bounds.
-     * @custom_group Window
+     * @category Window
      * @param {number[]} [out] - Optional out
      * @returns {number[]}
      */
@@ -746,7 +746,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window center.
-     * @custom_group Window
+     * @category Window
      * @param {number[]} [out] - Optional out
      * @returns {number[]}
      */
@@ -756,7 +756,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current context window aspect ratio.
-     * @custom_group Window
+     * @category Window
      * @returns {number}
      */
     getWindowAspectRatio(){
@@ -765,7 +765,7 @@ class App extends EventDispatcher{
 
     /**
      * Enables / disables the current context window fullscreen mode
-     * @custom_group Window
+     * @category Window
      * @param enable
      */
     setWindowFullscreen(enable){
@@ -808,7 +808,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns true if the current context window is fullscreen.
-     * @custom_group Window
+     * @category Window
      * @returns {boolean}
      */
     isWindowFullscreen(){
@@ -821,98 +821,98 @@ class App extends EventDispatcher{
 
     /**
      * Callback on mouse down event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseDown(e){}
 
     /**
      * Callback on mouse drag event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseDrag(e){}
 
     /**
      * Callback on mouse up event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseUp(e){}
 
     /**
      * Callback on mouse double click event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseDblClick(e){}
 
     /**
      * Callback on mouse move event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseMove(e){}
 
     /**
      * Callback on mouse enter event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseEnter(e){}
 
     /**
      * Callback on mouse out event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseOut(e){}
 
     /**
      * Callback on mouse wheel event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onMouseWheel(e){}
 
     /**
      * Callback on touch begin event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onTouchBegin(e){}
 
     /**
      * Callback on touch move event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onTouchMove(e){}
 
     /**
      * Callback on touch end event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onTouchEnd(e){}
 
     /**
      * Callback on key down event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onKeyDown(e){}
 
     /**
      * Callback on key press event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onKeyPress(e){};
 
     /**
      * Callback on key up event.
-     * @custom_group User Input
+     * @category User Input
      * @param e
      */
     onKeyUp(e){}
@@ -923,7 +923,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the mouse current position.
-     * @custom_group User Input
+     * @category User Input
      * @param out
      * @returns {*}
      */
@@ -933,7 +933,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the mouse previous position.
-     * @custom_group User Input
+     * @category User Input
      * @param out
      * @returns {*}
      */
@@ -943,7 +943,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current normalized mouse position.
-     * @custom_group User Input
+     * @category User Input
      * @param out
      * @returns {*}
      */
@@ -953,7 +953,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the previous normalized mouse position.
-     * @custom_group User Input
+     * @category User Input
      * @param out
      * @returns {*}
      */
@@ -963,7 +963,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current mouse x-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionX(){
@@ -972,7 +972,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current mouse y-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionY(){
@@ -981,7 +981,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the previous mouse x-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionXPrev(){
@@ -990,7 +990,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the previous mouse y-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionYPrev(){
@@ -999,7 +999,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current normalized mouse x-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionXNormalized(){
@@ -1008,7 +1008,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the current normalized mouse y-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionYNormalized(){
@@ -1017,7 +1017,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the previous normalized mouse x-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionXPrevNormalized(){
@@ -1026,7 +1026,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the previous normalized mouse y-coordinate.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMousePositionYPrevNormalized(){
@@ -1035,7 +1035,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the mouse wheel delta.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMouseWheelDelta(){
@@ -1044,7 +1044,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns the mouse wheel direction.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     getMouseWheelDirection(){
@@ -1053,7 +1053,7 @@ class App extends EventDispatcher{
 
     /**
      * Returns true if the mouse is down.
-     * @custom_group User Input
+     * @category User Input
      * @returns {*}
      */
     isMouseDown(){
