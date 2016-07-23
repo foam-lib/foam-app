@@ -7,7 +7,7 @@ export const State = Object.freeze({
     RUNNING : 'running'
 });
 
-export default class Time extends EventDispatcher {
+class Time extends EventDispatcher {
     /*----------------------------------------------------------------------------------------------------------------*/
     // Constructor
     /*----------------------------------------------------------------------------------------------------------------*/
@@ -106,3 +106,5 @@ elapsed: ${this._secondsElapsed}`;
 }
 
 Time.__sharedTime = null;
+
+export default Time;
