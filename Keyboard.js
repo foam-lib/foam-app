@@ -6,7 +6,7 @@ import EventDispatcher from 'foam-event/EventDispatcher';
  * @classdesc Keyboard input representation.
  * @augments EventDispatcher
  */
-export default class Keyboard extends EventDispatcher{
+class Keyboard extends EventDispatcher{
     constructor(){
         if(Keyboard.__sharedKeyboard){
             throw new Error('Class is singleton.');
@@ -17,7 +17,7 @@ export default class Keyboard extends EventDispatcher{
 
     /**
      * Returns a shared keyboard instance.
-     * @returns {null|*}
+     * @returns {null|Keyboard}
      */
     static sharedKeyboard(){
         return Keyboard.__sharedKeyboard;
@@ -25,3 +25,5 @@ export default class Keyboard extends EventDispatcher{
 }
 
 Keyboard.__sharedKeyboard = null;
+
+export default Keyboard;
