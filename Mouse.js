@@ -5,7 +5,7 @@ import * as Vec2 from 'foam-math/Vec2';
  * Mouse
  * @class Mouse
  * @classdesc Mouse input representation.
- * @augments EventDispatcher
+ * @extends EventDispatcher
  */
 class Mouse extends EventDispatcher{
     /*----------------------------------------------------------------------------------------------------------------*/

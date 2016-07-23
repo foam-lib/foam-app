@@ -112,7 +112,7 @@ function createFoamContainer(){
 /**
  * @class App
  * @classdesc The base class for all Foam applications.
- * @augments EventDispatcher
+ * @extends EventDispatcher
  */
 class App extends EventDispatcher{
     /*----------------------------------------------------------------------------------------------------------------*/

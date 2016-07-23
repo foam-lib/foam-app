@@ -4,7 +4,7 @@ import EventDispatcher from 'foam-event/EventDispatcher';
  * Keyboard
  * @class Keyboard
  * @classdesc Keyboard input representation.
- * @augments EventDispatcher
+ * @extends EventDispatcher
  */
 class Keyboard extends EventDispatcher{
     constructor(){
