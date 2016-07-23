@@ -119,13 +119,6 @@ class App extends EventDispatcher{
     // Constructor
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    /**
-     * Constructor
-     * @param config
-     * @param resources
-     * @returns {App}
-     * @private
-     */
     constructor(config,resources){
         if(App.__sharedApp){
             throw new Error('Class is singleton.');
