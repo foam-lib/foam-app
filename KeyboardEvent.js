@@ -6,7 +6,7 @@ import Event from 'foam-event/Event';
  * @classdesc Keyboard input event representation.
  * @augments Event
  */
-export default class KeyboardEvent extends Event{
+class KeyboardEvent extends Event{
     constructor(type,data){
         super(type,data);
     }
@@ -29,3 +29,5 @@ KeyboardEvent.KEY_DOWN = 'keydown';
  * @type {string}
  */
 KeyboardEvent.KEY_UP = 'keyup';
+
+export default KeyboardEvent;
