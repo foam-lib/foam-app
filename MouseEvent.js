@@ -1,6 +1,6 @@
 import Event from 'foam-event/Event';
 
-export default class MouseEvent extends Event{
+class MouseEvent extends Event{
     constructor(type,data){
         super(type,data);
     }
@@ -16,3 +16,5 @@ MouseEvent.MOUSE_OUT = 'mouseout';
 MouseEvent.MOUSE_ENTER = 'mouseenter';
 MouseEvent.MOUSE_LEAVE = 'mouseleave';
 MouseEvent.MOUSE_WHEEL = 'mousewheel';
+
+export default MouseEvent;
