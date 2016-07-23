@@ -7,7 +7,7 @@ import * as Vec2 from 'foam-math/Vec2';
  * @classdesc Mouse input representation.
  * @augments EventDispatcher
  */
-export default class Mouse extends EventDispatcher{
+class Mouse extends EventDispatcher{
     /*----------------------------------------------------------------------------------------------------------------*/
     // Constructor
     /*----------------------------------------------------------------------------------------------------------------*/
@@ -229,8 +229,9 @@ export default class Mouse extends EventDispatcher{
                 move:             ${this._move} \n
                 wheelDelta:       ${this._wheelDelta} \n
                 wheelDirection:   ${this._wheelDirection} \n`;
-
     }
 }
 
 Mouse.__sharedMouse = null;
+
+export default Mouse;
