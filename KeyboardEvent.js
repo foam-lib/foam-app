@@ -2,11 +2,14 @@ import Event from 'foam-event/Event';
 
 /**
  * KeyboardEvent
- * @class KeyboardEvent
  * @classdesc Keyboard input event representation.
  * @extends Event
  */
 class KeyboardEvent extends Event{
+    /**
+     * @param type
+     * @param data
+     */
     constructor(type,data){
         super(type,data);
     }
