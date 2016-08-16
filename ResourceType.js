@@ -11,6 +11,7 @@
 const ResourceType = Object.freeze({
     TEXT : 'text',
     IMAGE : 'image',
+    SVG : 'svg',
     VIDEO : 'video',
     JSON : 'json',
     ARRAY_BUFFER : 'arraybuffer'
