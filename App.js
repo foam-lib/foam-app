@@ -1105,6 +1105,7 @@ function loadResource(index,resource,onSuccess,onError,strict){
 
     if(type !== ResourceType.TEXT &&
        type !== ResourceType.IMAGE &&
+       type !== ResourceType.SVG &&
        type !== ResourceType.JSON &&
        type !== ResourceType.VIDEO &&
        type !== ResourceType.ARRAY_BUFFER){
@@ -1137,6 +1138,14 @@ function loadResource(index,resource,onSuccess,onError,strict){
             request(src,type, function(response){
                 onSuccess_(JSON.parse(response));
             },onError_);
+            break;
+
+        case ResourceType.SVG:
+            request(src,'text',function(response){
+                const div = document.createElement('div');
+                div.innerHTML = response;
+                onSuccess_(div.children[0]);
+            });
             break;
 
         case ResourceType.VIDEO:
