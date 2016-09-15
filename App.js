@@ -1171,7 +1171,7 @@ function loadResource(index,resource,onSuccess,onError,strict){
 
             //chrome/firefox
             if(!isSafari){
-                video.addEventListener('canplay', function(){
+                video.addEventListener('canplaythrough', function(){
                     onSuccess_(video);
                 });
             }
@@ -1218,7 +1218,7 @@ function loadResourceBundle(bundle,onSuccess,onError,onProcess,strict){
 
     function onFileProcessed(index,num,src){
         onProcess({
-            index : index,
+            index : index - 1,
             num : num,
             src : src
         });
